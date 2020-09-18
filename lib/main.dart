@@ -142,6 +142,7 @@ class ChildPage extends StatefulWidget {
 class ChildPageState extends State<ChildPage> {
 
   int _counter = 0;
+  int test = 0;
 
   void _incrementCounterchild() {
     setState(() {
