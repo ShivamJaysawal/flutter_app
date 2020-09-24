@@ -15,26 +15,45 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Login Screen"),
       ),
-      body: Center(
-        child: Container(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: Container(
+            color: Colors.black,
+            width: 350,
+            height: 350,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
 
-          width: 100,
-          height: 100,
-          padding: EdgeInsets.all(8),
-          alignment:Alignment.center ,
-          decoration: BoxDecoration(
-           borderRadius:BorderRadius.circular(10),
-            boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 10,offset: Offset(2.0,10.0))],
-            color: Colors.teal,
-            gradient: LinearGradient(
-              colors: [Colors.yellow,Colors.red]
-            )
+                    width: 100,
+                    height: 100,
+                    padding: EdgeInsets.all(8),
+                    color: Colors.red,
+                  ),
+                  Container(
+
+                    width: 100,
+                    height: 100,
+                    padding: EdgeInsets.all(8),
+                    color: Colors.yellow,
+                  ),
+                  Container(
+
+                    width: 100,
+                    height: 100,
+                    padding: EdgeInsets.all(8),
+                    color: Colors.green,
+                  )
+                ],
+              ),
+            ),
           ),
-          child: Text("I am a box",textAlign: TextAlign.center,style: TextStyle(
-            color: Colors.white,
-            fontWeight:FontWeight.bold,
-            fontSize: 20
-          ),),
         ),
       )
     );
