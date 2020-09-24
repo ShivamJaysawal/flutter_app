@@ -15,9 +15,28 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Login Screen"),
       ),
-      body: Container(
-        child: Center(child: Text("Hi Fluttewr")),
-      ),
+      body: Center(
+        child: Container(
+
+          width: 100,
+          height: 100,
+          padding: EdgeInsets.all(8),
+          alignment:Alignment.center ,
+          decoration: BoxDecoration(
+           borderRadius:BorderRadius.circular(10),
+            boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 10,offset: Offset(2.0,10.0))],
+            color: Colors.teal,
+            gradient: LinearGradient(
+              colors: [Colors.yellow,Colors.red]
+            )
+          ),
+          child: Text("I am a box",textAlign: TextAlign.center,style: TextStyle(
+            color: Colors.white,
+            fontWeight:FontWeight.bold,
+            fontSize: 20
+          ),),
+        ),
+      )
     );
   }
 }
