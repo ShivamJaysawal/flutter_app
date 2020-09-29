@@ -3,6 +3,8 @@ import 'package:flutter_app/ChangeNameCard.dart';
 import 'package:flutter_app/drawer.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_app/utils/Constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -45,6 +47,12 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: Text("Login Screen"),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.exit_to_app),onPressed: (){
+            Contants.prefs.setBool("loggedIn", false);
+            Navigator.pushReplacementNamed(context, "/login");
+          },)
+        ],
       ),
       body:Padding(
         padding: const EdgeInsets.all(16.0),

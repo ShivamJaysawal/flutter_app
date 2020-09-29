@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/bg_image.dart';
 import 'package:flutter_app/pages/home_page.dart';
+import 'package:flutter_app/utils/Constants.dart';
+
 
 class LoginPage extends StatefulWidget {
   @override
@@ -20,16 +22,23 @@ class _LoginPageState extends State<LoginPage> {
     final form= formKey.currentState;
     if(form.validate()){
       form.save();
-      //code for show snackbar--------------------------------
+      //--saving in sharedpreference
+      Contants.prefs.setBool("loggedIn", true);
+
+
+      //------code for show snackbar--------------------------------
      /* final snackBar=SnackBar(
         content: Text("Username:$_userName,Password:$_password"),
       );
       scaffoldKey.currentState.showSnackBar(snackBar);*/
-     //code for navigate------------------
+      //------code for show snackbar ends here--------------------------------
+     //------code for navigate------------------------------------------------
       //----1st way---
      // Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
       //---2nd way using routes-----------
-      Navigator.pushNamed(context, "/home");
+     // Navigator.pushNamed(context, "/home");//then added in stack
+      //then it removed login_page from stack just like finish..
+      Navigator.pushReplacementNamed(context, "/home");
 
     }
 
