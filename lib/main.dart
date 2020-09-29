@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/pages/home_page.dart';
 import 'package:flutter_app/pages/login_page.dart';
+import 'package:path/path.dart';
 
 void main(){
   runApp(MaterialApp(
@@ -10,6 +11,10 @@ void main(){
     theme: ThemeData(
       primarySwatch: Colors.purple
     ),
+    routes: {
+      "/login":(BuildContext)=>LoginPage(),
+      "/home":(BuildContext)=>HomePage(),
+    },
   ));
 
 }
