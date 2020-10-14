@@ -9,18 +9,44 @@ import 'dart:async';
 
 main() {
 
-  print("Main program start here");
-  printFileContent();
-  print("Main program ends here");
+  runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "Shivam App",
+      home:Container(
+        child: FutureBuilder(
+          future: downloadFile(),
+          builder: (context,snapShot){
+            switch(snapShot.connectionState){
+              case ConnectionState.none:
+              case ConnectionState.active:
+              case ConnectionState.done:
+                return Center(
+
+                  child: Text("Content:${snapShot.data}"),
+                );
+
+              case ConnectionState.waiting:
+                return Center(
+                  child: CircularProgressIndicator(),
+
+                );
+            }
+          },
+        ),
+      )
+
+
+  ));
+
 }
-printFileContent() async{
-  String fileContent=await downloadFile();
-  print("Main program Printing File Content :$fileContent");
-}
-Future<String> downloadFile(){
-  Future<String> result=Future.delayed(Duration(seconds: 6),(){
+
+
+Future<String> downloadFile() async{
+
+  String result= await Future.delayed(Duration(seconds: 6),(){
     return "My Secret File Content";
   });
+
   return result;
 }
 
