@@ -6,13 +6,13 @@ import 'dart:convert';
 import 'package:flutter_app/utils/Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class HomePage extends StatefulWidget {
+class HomePageFB extends StatefulWidget {
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageFBState createState() => _HomePageFBState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageFBState extends State<HomePageFB> {
   TextEditingController _nameController=TextEditingController();
   var myText="Change Me";
   var url="https://jsonplaceholder.typicode.com/photos";
@@ -58,18 +58,18 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(16.0),
         child: data!=null
             ? ListView.builder(
-                itemBuilder: (context,index){
-                  return Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: ListTile(
-                      title:Text(data[index]["title"]) ,
-                      subtitle: Text("ID:${data[index]["id"]}"),
-                      leading: Image.network(data[index]["thumbnailUrl"],height: 50,width: 50,),
-                    ),
-                  );
-                },
-                itemCount: data.length
-            )
+            itemBuilder: (context,index){
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ListTile(
+                  title:Text(data[index]["title"]) ,
+                  subtitle: Text("ID:${data[index]["id"]}"),
+                  leading: Image.network(data[index]["thumbnailUrl"],height: 50,width: 50,),
+                ),
+              );
+            },
+            itemCount: data.length
+        )
             :Center(child: CircularProgressIndicator()),
       ),
       drawer: MyDrawer(),
