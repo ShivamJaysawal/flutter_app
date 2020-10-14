@@ -5,27 +5,24 @@ import 'package:flutter_app/pages/login_page.dart';
 import 'package:path/path.dart';
 import 'package:flutter_app/utils/Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:async';
 
-Future main() async{
-  WidgetsFlutterBinding.ensureInitialized();
-  Contants.prefs=await SharedPreferences.getInstance();
+main() {
 
-
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    title: "Shivam App",
-    home:Contants.prefs.getBool("loggedIn")==true
-        ?HomePage()
-        :LoginPage(),
-    theme: ThemeData(
-      primarySwatch: Colors.purple
-    ),
-    routes: {
-      "/login":(BuildContext)=>LoginPage(),
-      "/home":(BuildContext)=>HomePage(),
-    },
-  ));
-
+  print("Main program start here");
+  printFileContent();
+  print("Main program ends here");
 }
+printFileContent() async{
+  String fileContent=await downloadFile();
+  print("Main program Printing File Content :$fileContent");
+}
+Future<String> downloadFile(){
+  Future<String> result=Future.delayed(Duration(seconds: 6),(){
+    return "My Secret File Content";
+  });
+  return result;
+}
+
 
 
