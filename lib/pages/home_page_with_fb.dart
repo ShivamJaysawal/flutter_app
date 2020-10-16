@@ -13,34 +13,22 @@ class HomePageFB extends StatefulWidget {
 }
 
 class _HomePageFBState extends State<HomePageFB> {
-  TextEditingController _nameController=TextEditingController();
-  var myText="Change Me";
+
   var url="https://jsonplaceholder.typicode.com/photos";
-  var data;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getData();
   }
-  getData() async{
+  Future getData() async{
     var res=await http.get(url);
-    print(res.body);
-    data=jsonDecode(res.body);
+   var data=jsonDecode(res.body);
     print(data);
-    setState(() {
+    return data;
+  }
 
-    });
-  }
-  //below function is demo for if u want to show widget on condition basis
-  Widget getWidget() {
-    if(data!=null){
-      return SingleChildScrollView(child: Card());
-    }
-    else{
-      return Center(child: CircularProgressIndicator());
-    }
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,30 +42,46 @@ class _HomePageFBState extends State<HomePageFB> {
           },)
         ],
       ),
-      body:Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: data!=null
-            ? ListView.builder(
-            itemBuilder: (context,index){
-              return Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ListTile(
-                  title:Text(data[index]["title"]) ,
-                  subtitle: Text("ID:${data[index]["id"]}"),
-                  leading: Image.network(data[index]["thumbnailUrl"],height: 50,width: 50,),
-                ),
+      body:FutureBuilder(
+        future: getData(),
+        builder: (context,snapShot){
+          switch(snapShot.connectionState){
+            case ConnectionState.none:
+              return Center(child: Text("Fetch something"),);
+            case ConnectionState.active:
+            case ConnectionState.waiting:
+              return Center(child: CircularProgressIndicator(),);
+            case ConnectionState.done:
+              if(snapShot.hasError){
+                return Center(child: Text("Some error occured"),);
+              }
+             return ListView.builder(
+                  itemBuilder: (context,index){
+                    return Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: ListTile(
+                        title:Text(snapShot.data[index]["title"]) ,
+                        subtitle: Text("ID:${snapShot.data[index]["id"]}"),
+                        leading: Image.network(snapShot.data[index]["thumbnailUrl"],height: 50,width: 50,),
+                      ),
+                    );
+                  },
+                  itemCount: snapShot.data.length
               );
-            },
-            itemCount: data.length
-        )
-            :Center(child: CircularProgressIndicator()),
+
+
+
+
+          }
+
+        },
       ),
       drawer: MyDrawer(),
       floatingActionButton: FloatingActionButton(onPressed:(){
-        myText=_nameController.text;
+        /*myText=_nameController.text;
         setState(() {
 
-        });
+        });*/
       },
           child: Icon(Icons.refresh)),
     );
