@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/pages/home_page.dart';
 import 'package:flutter_app/pages/home_page_with_fb.dart';
+import 'package:flutter_app/pages/home_page_with_sb.dart';
 import 'package:flutter_app/pages/login_page.dart';
 import 'package:path/path.dart';
 import 'package:flutter_app/utils/Constants.dart';
@@ -16,14 +17,14 @@ Future main() async{
     debugShowCheckedModeBanner: false,
     title: "Shivam App",
     home:Contants.prefs.getBool("loggedIn")==true
-        ?HomePageFB()
+        ?HomePageSB()
         :LoginPage(),
     theme: ThemeData(
       primarySwatch: Colors.purple
     ),
     routes: {
       "/login":(BuildContext)=>LoginPage(),
-      "/home":(BuildContext)=>HomePage(),
+      "/home":(BuildContext)=>HomePageSB(),
     },
   ));
 

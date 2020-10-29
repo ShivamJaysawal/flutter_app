@@ -15,8 +15,9 @@ class _LoginPageState extends State<LoginPage> {
   final passwordController=TextEditingController();
   final formKey=GlobalKey<FormState>();
   final scaffoldKey=GlobalKey<ScaffoldState>();
-  var _userName;
+  var _userNameHomePageSB;
   var _password;
+  var _userName;
 
   void _submit(){
     final form= formKey.currentState;
